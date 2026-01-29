@@ -1,5 +1,6 @@
-use leptos::prelude::*;
+use console_log;
 use learning_leptos::App;
+use leptos::prelude::*;
 
 fn main() {
     // set up logging
