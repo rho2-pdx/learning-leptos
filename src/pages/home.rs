@@ -43,11 +43,9 @@ pub fn Home() -> impl IntoView {
 
                 <h1>"Welcome to Leptos"</h1>
 
-                <div class="buttons">
-                    <Button />
-                    <Button increment=5 />
-                    <Button increment=10 />
-                </div>
+                <Button />
+                <Button increment=5 />
+                <Button increment=10 />
                 <div class="buttons">
                     <Example />
                 </div>
