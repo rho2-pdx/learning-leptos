@@ -1,9 +1,14 @@
 use leptos::prelude::*;
 
+/// shows progress toward a goal
 #[component]
 pub fn ProgressBar(
-    #[prop(default = 100)] max: u16,
-    #[prop(into)] progress: Signal<i32>,
+    /// maximum value of progress bar
+    #[prop(default = 100)]
+    max: u16,
+    /// how much progress to display
+    #[prop(into)]
+    progress: Signal<i32>,
 ) -> impl IntoView {
     view! {
         <progress

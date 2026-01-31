@@ -3,7 +3,11 @@ use leptos::prelude::*;
 
 /// A parameterized incrementing button
 #[component]
-pub fn Button(#[prop(default = 1)] increment: i32) -> impl IntoView {
+pub fn Button(
+    /// the amount of progress a click of the button does, default: 1
+    #[prop(default = 1)]
+    increment: i32,
+) -> impl IntoView {
     let (count, set_count) = signal(0);
     let double_count = move || count.get() * 2;
     view! {
