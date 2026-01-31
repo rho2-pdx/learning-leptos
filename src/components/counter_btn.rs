@@ -1,3 +1,4 @@
+use crate::components::progress_bar::ProgressBar;
 use leptos::prelude::*;
 
 /// A parameterized incrementing button
@@ -19,13 +20,11 @@ pub fn Button(#[prop(default = 1)] increment: i32) -> impl IntoView {
 
             "Click me: " {count}
         </button>
-        <progress
-            max="50" // signals are functions, so 'value=count', 'value=move || count.get()' are the same
-
-            //value=count
-            //value=move || count.get() * 2
-            value = double_count
-        />
+        <button on:click=move |_| *set_count.write() += 1>
+            "Click me"
+        </button>
+        // now we use our component!
+            <ProgressBar progress=count/>
         <p>
             "Double Count: "
             {double_count}
