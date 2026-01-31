@@ -24,9 +24,6 @@ pub fn Button(#[prop(default = 1)] increment: i32) -> impl IntoView {
             adding new progress bar
             */
             <ProgressBar progress=count/>
-        <p>
-            "Double Count: "
-            {double_count}
-        </p>
+            <ProgressBar progress=Signal::derive(double_count)/>
     }
 }
