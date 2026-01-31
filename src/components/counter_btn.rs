@@ -20,10 +20,9 @@ pub fn Button(#[prop(default = 1)] increment: i32) -> impl IntoView {
 
             "Click me: " {count}
         </button>
-        <button on:click=move |_| *set_count.write() += 1>
-            "Click me"
-        </button>
-        // now we use our component!
+            /*
+            adding new progress bar
+            */
             <ProgressBar progress=count/>
         <p>
             "Double Count: "
