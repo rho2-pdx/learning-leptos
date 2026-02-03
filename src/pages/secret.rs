@@ -28,7 +28,7 @@ pub fn Secret() -> impl IntoView {
             {values.into_iter()
                 .map(|n| view! { <li>{n}</li>})
                 .collect::<Vec<_>>()}
-                // this is unkeyed !!
+                // this is unkeyed
         </ul>
         */
         <ul>
