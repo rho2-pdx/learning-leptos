@@ -28,6 +28,7 @@ pub fn Secret() -> impl IntoView {
             {values.into_iter()
                 .map(|n| view! { <li>{n}</li>})
                 .collect::<Vec<_>>()}
+                // this is unkeyed !!
         </ul>
         */
         <ul>
@@ -35,7 +36,8 @@ pub fn Secret() -> impl IntoView {
                 .map(|n| view! { <li>{n}</li>})
                 .collect_view()}
         </ul>
-        <ul> {counter_buttons}</ul>
+        <ul><h3>"this is the counter button part"
+        </h3>{counter_buttons}</ul>
 
     }
 }
