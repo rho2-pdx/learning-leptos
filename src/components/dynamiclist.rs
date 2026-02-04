@@ -2,7 +2,7 @@ use leptos::prelude::*;
 /// A list of counters that allows you to add or
 /// remove counters.
 #[component]
-fn DynamicList(
+pub fn DynamicList(
     /// The number of counters to begin with.
     initial_length: usize,
 ) -> impl IntoView {

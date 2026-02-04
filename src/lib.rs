@@ -8,6 +8,7 @@ mod pages;
 
 // Top-Level pages
 use crate::pages::home::Home;
+use crate::pages::iterating::IteratingPage;
 use crate::pages::secret::Secret;
 
 /// An app router which renders the homepage and handles 404's
@@ -30,6 +31,7 @@ pub fn App() -> impl IntoView {
             <Routes fallback=|| view! { NotFound }>
                 <Route path=path!("/") view=Home />
                 <Route path=path!("/secret") view=Secret />
+                <Route path=path!("/iterating") view=IteratingPage />
             </Routes>
         </Router>
     }

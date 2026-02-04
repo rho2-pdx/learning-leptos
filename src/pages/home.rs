@@ -43,6 +43,7 @@ pub fn Home() -> impl IntoView {
 
                 <h1>
                     <a href="/secret">"Welcome to Leptos"</a>
+                    <a href="/iterating">"\ndemo"</a>
                 </h1>
 
 
