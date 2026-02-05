@@ -776,6 +776,7 @@ dependencies = [
  "leptos_meta",
  "leptos_router",
  "log",
+ "reactive_stores",
  "wasm-bindgen",
  "wasm-bindgen-test",
  "web-sys",
