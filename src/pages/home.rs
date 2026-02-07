@@ -6,6 +6,8 @@ use leptos::prelude::*;
 /// Default Home Page
 #[component]
 pub fn Home() -> impl IntoView {
+    let (name, set_name) = signal("Controlled".to_string());
+
     view! {
         <ErrorBoundary fallback=|errors| {
             view! {
@@ -26,9 +28,6 @@ pub fn Home() -> impl IntoView {
             }
         }>
 
-        let (name, set_name) = signal("Controlled".to_string());
-
-        view! {
             <input type="text"
                 // adding :target gives us typed access to the element
                 // that is the target of the event that fires
@@ -42,7 +41,6 @@ pub fn Home() -> impl IntoView {
                 prop:value=name
             />
             <p>"Name is: " {name}</p>
-        }
 
             <div class="container">
 
