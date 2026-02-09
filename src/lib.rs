@@ -8,6 +8,7 @@ mod pages;
 
 // Top-Level pages
 use crate::pages::complex_iterator::ComplexIterator;
+use crate::pages::forms::FormPage;
 use crate::pages::home::Home;
 use crate::pages::iterating::IteratingPage;
 use crate::pages::secret::Secret;
@@ -34,6 +35,7 @@ pub fn App() -> impl IntoView {
                 <Route path=path!("/secret") view=Secret />
                 <Route path=path!("/iterating") view=IteratingPage />
                 <Route path=path!("/complex") view=ComplexIterator />
+                <Route path=path!("/forms") view=FormPage />
             </Routes>
         </Router>
     }
