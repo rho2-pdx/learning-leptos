@@ -18,6 +18,8 @@ pub fn FormPage() -> impl IntoView {
     // -- Uncontrolled input --
     let (uncontrolled_name, set_uncontrolled_name) = signal("Uncontrolled".to_string());
 
+    let (value, set_value) = signal(0i32); // special case
+    let some_value = RwSignal::new("special case".to_string());
     let input_element: NodeRef<Input> = NodeRef::new();
     let on_submit = move |ev: SubmitEvent| {
         // stop the page from reloading!
@@ -114,8 +116,27 @@ pub fn FormPage() -> impl IntoView {
         <Show when=move || spam_me.get()>
             <p>"You'll receive great spam"</p>
         </Show>
+    <hr style="border: 1px solid orange;"></hr>
 
-
+    // Uncontrolled:
+    //
+    // browser controls the state of the input element (rather than the framework)
+    // Instead of using a signal to continuously update, it's held in a NodeRef
+    // Typically you use this when you want a "submit" button before anything is saved
+    //
+    // leptos::html module provides lots of types for every HTML element
+    // leptos::ev module is for the submit functionality
+    //
+    // 1. use value (not prop:value) since browser controls state
+    // 2. use node_ref=... to fill NodeRef, a kind of reactive smart pointer
+    //  - NodeRef is used to access the underlying DOM node, value set when element renders
+    //
+    // on_submit accesses input's value to call set_name.set()
+    // to access DOM node in NodeRef, we can call as function or use .get()
+    // returns "Option<leptos::HtmlElement<html::Input>>" which is not always safe to unwrap!
+    //      - however in this case, we know it's already been mounted due to firing the event so it's safe
+    // now that it's unwrapped, we can call .value() since it's correctly-typed HTML
+    // uncontrolled:
         <div>
             <form on:submit=on_submit>
                 <input type="text"
@@ -127,13 +148,39 @@ pub fn FormPage() -> impl IntoView {
             <p>"Uncontrolled Name is: "{uncontrolled_name}</p>
         </div>
 
+        // Special cases!
+
+        // text area does not support HTML "value", gets that as plain text child node
+        <div>
+            <textarea
+                prop:value=move || some_value.get()
+                on:input:target=move |ev| some_value.set(ev.target().value())
+            >
+                {some_value}
+            </textarea>
+
+            // the select element can be controlled via value property on the select itself
+            <select
+                on:change:target=move |ev| {
+                    set_value.set(ev.target().value().parse().unwrap());
+                }
+                prop:value=move || value.get().to_string()
+            >
+                <option value="0">"0"</option>
+                <option value="1">"1"</option>
+                <option value="2">"2"</option>
+            </select>
+            <button on:click=move |_| set_value.update(|n| {
+                if *n == 2 {
+                    *n = 0;
+                } else {
+                    *n += 1;
+                }
+
+            })>
+                "Next Option"
+            </button>
+        </div>
+
     }
 }
-
-// Uncontrolled:
-//
-// browser controls the state of the input element (rather than the framework)
-// Instead of using a signal to continuously update, it's held in a NodeRef
-// Typically you use this when you want a "submit" button before anything is saved
-//
-// leptos::html module provides lots of types for every HTML element
