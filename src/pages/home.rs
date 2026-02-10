@@ -61,9 +61,8 @@ pub fn Home() -> impl IntoView {
                     <a href="/secret">"Welcome to Leptos"</a>
                     <a href="/iterating">"\ndemo"</a>
                 </h1>
-                    <p>
-                        <a href="/forms">"\n\nforms+inputs"</a>
-                    </p>
+                    <p><a href="/forms">"forms+inputs"</a></p>
+                    <p><a href="/control">"control flow"</a></p>
                 <Button increment=5 />
                 <Button increment=10 />
                 <div class="buttons">
