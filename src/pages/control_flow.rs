@@ -1,3 +1,4 @@
+use leptos::logging;
 use leptos::prelude::*;
 
 /// this is for practicing the control flow section, like with impl and reactive T funcs
@@ -5,6 +6,23 @@ use leptos::prelude::*;
 pub fn ControlFlow() -> impl IntoView {
     let (value, set_value) = signal(0);
     let is_odd = move || value.get() % 2 != 0;
+
+    let message = move || match value.get() {
+        0 => "Zero",
+        1 => "One",
+        n if is_odd() => "Odd",
+        _ => "Even",
+    };
+    // statements can start reloading too much as derived signals
+    let message_logged = move || {
+        if value.get() > 5 {
+            logging::log!("{}: rendering Big", value.get());
+            "Big"
+        } else {
+            logging::log!("{}: rendering Small", value.get());
+            "Small"
+        }
+    };
 
     view! {
         <p>
@@ -14,6 +32,12 @@ pub fn ControlFlow() -> impl IntoView {
                 "Even"
             }}
         </p>
+        <p>{message}</p>
+        <p>{message_logged}</p>
+        <button
+            on:click=move |_| {
+                set_value.set(value.get() + 1)
+            } />
     }
 }
 
@@ -27,3 +51,8 @@ pub fn ControlFlow() -> impl IntoView {
 //
 // TO BE REACTIVE values must be functions. Hence wrapped things in move || closures
 //
+
+// To prevent Over-Rendering:
+//
+// Each one of the control-flow functions in here is a derived signal:
+// - it will rerun every time the value changes
