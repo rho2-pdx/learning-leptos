@@ -22,7 +22,7 @@ pub fn Button(
             style=("--columns", move || count.get().to_string())
         >
 
-            "Click me: " {count}
+            "Click me ok: " {count}
         </button>
             /*
             adding new progress bar
